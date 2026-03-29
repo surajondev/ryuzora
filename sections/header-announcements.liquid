@@ -8,17 +8,9 @@
   ></script>
 {% endif %}
 
-{% if section.settings.use_countdown_layout %}
-  <script
-    src="{{ 'announcement-countdown.js' | asset_url }}"
-    type="module"
-    fetchpriority="low"
-  ></script>
-{% endif %}
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} announcement-bar--full-bleed"
+  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
   style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
 >
   {% liquid
@@ -30,158 +22,25 @@
     endif
   %}
 
-  {% if section.settings.use_countdown_layout %}
-    <div class="announcement-countdown">
-      {% if section.settings.show_social %}
-        <div class="announcement-countdown__social">
-          {% if settings.social_facebook_link != blank %}
-            <a href="{{ settings.social_facebook_link }}" aria-label="Facebook" class="announcement-countdown__social-link">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M13.5 9H16V6h-2.5C11.6 6 11 7.6 11 9.2V11H9v3h2v6h3v-6h2.3l.7-3H14V9.6c0-.4.2-.6.5-.6Z" fill="currentColor"/>
-              </svg>
-            </a>
-          {% endif %}
-          {% if settings.social_instagram_link != blank %}
-            <a href="{{ settings.social_instagram_link }}" aria-label="Instagram" class="announcement-countdown__social-link">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M16.8 6H7.2C6 6 5 7 5 8.2v7.6C5 17 6 18 7.2 18h9.6c1.2 0 2.2-1 2.2-2.2V8.2C19 7 18 6 16.8 6Zm-4.8 9.5a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6Zm4.1-6.9a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" fill="currentColor"/>
-              </svg>
-            </a>
-          {% endif %}
-          {% if settings.social_twitter_link != blank %}
-            <a href="{{ settings.social_twitter_link }}" aria-label="X" class="announcement-countdown__social-link">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 5h4.6l3.3 4.6L17.8 5H20l-5.1 7.1L20 19h-4.6l-3.6-5L7.9 19H5.7l5.3-7.4L6 5Z" fill="currentColor"/>
-              </svg>
-            </a>
-          {% endif %}
-        </div>
-      {% endif %}
+  <announcement-bar-component
+    class="announcement-bar__slider"
+    {% if autoplay == true %}
+      autoplay="{{ section.settings.speed }}" aria-live="polite"
+    {% endif %}
+  >
+    {% if show_arrows %}
+      {% render 'slideshow-arrows', icon_style: 'chevron' %}
+    {% endif %}
 
-      <div class="announcement-countdown__message">
-        {{ section.settings.sale_message }}
-        {% if section.settings.sale_code != blank %}
-          <span class="announcement-countdown__code">{{ section.settings.sale_code }}</span>
-        {% endif %}
-        {% if section.settings.sale_link != blank %}
-          <a class="announcement-countdown__link" href="{{ section.settings.sale_link }}">Shop now</a>
-        {% endif %}
-      </div>
-
-      <div class="announcement-countdown__timer">
-        <span class="announcement-countdown__label">ENDS IN:</span>
-        <span class="announcement-countdown__clock" data-countdown-clock></span>
-      </div>
+    <div class="announcement-bar__slides">
+      {% content_for 'blocks' %}
     </div>
-  {% else %}
-    <announcement-bar-component
-      class="announcement-bar__slider"
-      {% if autoplay == true %}
-        autoplay="{{ section.settings.speed }}" aria-live="polite"
-      {% endif %}
-    >
-      {% if show_arrows %}
-        {% render 'slideshow-arrows', icon_style: 'chevron' %}
-      {% endif %}
-
-      <div class="announcement-bar__slides">
-        {% content_for 'blocks' %}
-      </div>
-    </announcement-bar-component>
-  {% endif %}
+  </announcement-bar-component>
 </aside>
 
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
-  }
-
-  .announcement-bar--full-bleed {
-    padding: 0 !important;
-    grid-column: 1 / -1;
-  }
-
-  .announcement-bar--full-bleed > * {
-    grid-column: 1 / -1;
-  }
-
-  .announcement-countdown {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px;
-    align-items: center;
-    background: #000000;
-    color: #FFFFFF;
-    padding: 10px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.75rem;
-    width: 100%;
-  }
-
-  .announcement-countdown__message {
-    padding-inline: 12px;
-  }
-
-  .announcement-countdown__social {
-    display: inline-flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .announcement-countdown__social-link {
-    display: inline-flex;
-    width: 18px;
-    height: 18px;
-    color: #FFFFFF;
-  }
-
-  .announcement-countdown__social-link svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .announcement-countdown__message {
-    text-align: center;
-    font-weight: 600;
-  }
-
-  .announcement-countdown__code {
-    margin-left: 6px;
-    font-weight: 700;
-  }
-
-  .announcement-countdown__link {
-    margin-left: 10px;
-    color: #FFFFFF;
-    text-decoration: underline;
-  }
-
-  .announcement-countdown__timer {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-  }
-
-  .announcement-countdown__clock {
-    font-variant-numeric: tabular-nums;
-  }
-
-  @media screen and (max-width: 749px) {
-    .announcement-countdown {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 10px;
-    }
-
-    .announcement-countdown__social {
-      justify-content: center;
-    }
-
-    .announcement-countdown__timer {
-      justify-content: center;
-    }
   }
 
   .announcement-bar__slider {
@@ -276,35 +135,6 @@
     "groups": ["header"]
   },
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "use_countdown_layout",
-      "label": "Use countdown layout",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "sale_message",
-      "label": "Sale message",
-      "default": "Extra Discount Alert! Apply Code"
-    },
-    {
-      "type": "text",
-      "id": "sale_code",
-      "label": "Sale code",
-      "default": "GOAT"
-    },
-    {
-      "type": "url",
-      "id": "sale_link",
-      "label": "Sale link"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "label": "Show social icons",
-      "default": true
-    },
     {
       "type": "range",
       "id": "speed",

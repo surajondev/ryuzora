@@ -56,7 +56,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join the supporters list</h2>",
+                "text": "<h2>Join our email list</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -81,7 +81,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get early access to new posters and match drops.</p>",
+                "text": "<p>Get exclusive deals and early access to new products.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -115,9 +115,9 @@
             "width": "fill",
             "custom_width": 100,
             "inherit_color_scheme": true,
-            "color_scheme": "",
             "heading": "",
             "heading_preset": "h3",
+            "color_scheme": "",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 100,
@@ -171,11 +171,11 @@
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
-            "facebook_url": "",
-            "instagram_url": "https://www.instagram.com/ryuzora.store",
-            "youtube_url": "",
-            "tiktok_url": "",
-            "twitter_url": "",
+            "facebook_url": "https://www.facebook.com/",
+            "instagram_url": "https://www.instagram.com/",
+            "youtube_url": "https://www.youtube.com/",
+            "tiktok_url": "https://www.tiktok.com/",
+            "twitter_url": "https://x.com/",
             "threads_url": "",
             "linkedin_url": "",
             "bluesky_url": "",

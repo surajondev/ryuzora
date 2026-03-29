@@ -19,9 +19,11 @@
       assign inverse_logo = settings.logo
     endif
   endif
+
+  assign alt_text_fallback = shop.name | escape | append: ' ' | append: 'accessibility.home' | t
 %}
 
-  {% comment %}
+{% comment %}
   Output all logo variants, use CSS to hide/show the appropriate one
   based on the .header[transparent] selector
 {% endcomment %}
@@ -49,36 +51,34 @@
     assign inverse_logo_style = '--header-logo-image-width: ' | append: inverse_logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: inverse_logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: settings.logo_height | append: 'px; --header-logo-image-height-mobile: ' | append: settings.logo_height_mobile | append: 'px;'
   %}
 
-  {% if block_settings.logo_text_override != blank %}
-    <span class="header-logo__text">{{ block_settings.logo_text_override }}</span>
-  {% else %}
+  <span
+    class="header-logo__image-container header-logo__image-container--original"
+    data-testid="header-logo"
+  >
+    {% render 'image',
+      image: settings.logo,
+      class: 'header-logo__image',
+      height: settings.logo_height,
+      alt_text_fallback: alt_text_fallback,
+      text_fallback: shop.name,
+      style: logo_style
+    %}
+  </span>
+
+  {% if use_inverse_logo %}
     <span
-      class="header-logo__image-container header-logo__image-container--original"
-      data-testid="header-logo"
+      class="header-logo__image-container header-logo__image-container--inverse"
+      data-testid="header-logo-inverse"
     >
       {% render 'image',
-        image: settings.logo,
+        image: inverse_logo,
         class: 'header-logo__image',
         height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
         text_fallback: shop.name,
-        style: logo_style
+        style: inverse_logo_style
       %}
     </span>
-
-    {% if use_inverse_logo %}
-      <span
-        class="header-logo__image-container header-logo__image-container--inverse"
-        data-testid="header-logo-inverse"
-      >
-        {% render 'image',
-          image: inverse_logo,
-          class: 'header-logo__image',
-          height: settings.logo_height,
-          text_fallback: shop.name,
-          style: inverse_logo_style
-        %}
-      </span>
-    {% endif %}
   {% endif %}
 </a>
 
@@ -94,9 +94,6 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-
-    /* Make sure the logo visually hugs the left edge of the column when it is the first item in the left column */
-    margin-inline: calc(-1 * var(--padding-inline-start));
 
     &[data-hidden-on-home-page] {
       display: none;
@@ -141,21 +138,6 @@
   .header-logo__image-container--inverse {
     display: var(--header-logo-inverse-display, none);
   }
-
-  .header-logo__text {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 18px;
-    background: var(--goal-secondary);
-    color: var(--goal-on-surface);
-    border-radius: 999px;
-    font-family: var(--font-heading--family);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-  }
 {% endstylesheet %}
 
 {% schema %}
@@ -167,12 +149,6 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_logo_in_theme_settings"
-    },
-    {
-      "type": "text",
-      "id": "logo_text_override",
-      "label": "Logo text override",
-      "default": "SHOP"
     },
     {
       "type": "header",
@@ -202,26 +178,6 @@
       "type": "range",
       "id": "padding-block-end",
       "label": "t:settings.bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-start",
-      "label": "t:settings.left",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-inline-end",
-      "label": "t:settings.right",
       "min": 0,
       "max": 100,
       "step": 1,

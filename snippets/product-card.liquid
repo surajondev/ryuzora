@@ -33,6 +33,7 @@
 
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
+  assign product_view_context = product_view_context | default: 'collection'
 
   # Logic to determine which variant URL to use (matching swatch selection logic)
   assign variant_to_link = product.selected_or_first_available_variant
@@ -52,13 +53,6 @@
   if product.id == empty or product == blank
     assign onboarding = true
   endif
-
-  assign show_match_tag = false
-  if product and product != blank
-    if product.metafields.custom.player != blank or product.metafields.custom.match_date != blank
-      assign show_match_tag = true
-    endif
-  endif
 %}
 
 <product-card
@@ -76,9 +70,6 @@
     data-placeholder="true"
   {% endif %}
 >
-  {% if show_match_tag %}
-    <span class="product-card__tag">Match Moment</span>
-  {% endif %}
   <a
     id="{{ product_card_id | md5 }}"
     {% unless onboarding %}
@@ -123,6 +114,10 @@
 {% stylesheet %}
   .product-card__placeholder-image svg {
     height: 100%;
+  }
+
+  .product-card__content slideshow-component {
+    --cursor: pointer;
   }
 
   @media screen and (max-width: 749px) {
