@@ -1,0 +1,200 @@
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% capture media_gallery %}
+  {%- content_for 'block', type: '_product-media-gallery', id: 'media-gallery', closest.product: product -%}
+{% endcapture %}
+
+{% capture product_details %}
+  {% content_for 'block', type: '_product-details', id: 'product-details', closest.product: product %}
+{% endcapture %}
+
+{% capture additional_blocks %}
+  {% liquid
+    assign has_match_data = false
+    if product.metafields.custom.player != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.home_team != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.away_team != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.scoreline != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.goal_minute != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.competition != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.venue != blank
+      assign has_match_data = true
+    elsif product.metafields.custom.match_date != blank
+      assign has_match_data = true
+    endif
+  %}
+  <div class="goal-section goal-product color-{{ section.settings.color_scheme }}">
+    <div class="goal-product__grid">
+      {% if has_match_data %}
+        <div class="goal-match-panel">
+          <h3>Match Highlights</h3>
+          <div class="goal-match-list">
+            {% if product.metafields.custom.player != blank %}
+              <div class="goal-match-item"><strong>Scorer</strong><span>{{ product.metafields.custom.player }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.home_team != blank %}
+              <div class="goal-match-item"><strong>Home</strong><span>{{ product.metafields.custom.home_team }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.away_team != blank %}
+              <div class="goal-match-item"><strong>Away</strong><span>{{ product.metafields.custom.away_team }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.scoreline != blank %}
+              <div class="goal-match-item"><strong>Score</strong><span>{{ product.metafields.custom.scoreline }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.goal_minute != blank %}
+              <div class="goal-match-item"><strong>Minute</strong><span>{{ product.metafields.custom.goal_minute }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.competition != blank %}
+              <div class="goal-match-item"><strong>Competition</strong><span>{{ product.metafields.custom.competition }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.venue != blank %}
+              <div class="goal-match-item"><strong>Venue</strong><span>{{ product.metafields.custom.venue }}</span></div>
+            {% endif %}
+            {% if product.metafields.custom.match_date != blank %}
+              <div class="goal-match-item"><strong>Date</strong><span>{{ product.metafields.custom.match_date }}</span></div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      <div class="goal-specs">
+        <h3>Poster Specs</h3>
+        <p><strong>Paper:</strong> Museum-grade matte stock</p>
+        <p><strong>Sizes:</strong> A4, A3, A2, 18x24, 24x36</p>
+        <p><strong>Finish:</strong> Deep blacks, archival inks</p>
+        <p><strong>Shipping:</strong> 3-7 business days</p>
+      </div>
+    </div>
+  </div>
+{% endcapture %}
+
+{% if section.settings.enable_sticky_add_to_cart %}
+  {% liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign initial_quantity = current_variant.quantity_rule.min | default: 1
+  %}
+
+  <sticky-add-to-cart
+    class="sticky-add-to-cart"
+    data-variant-available="{{ current_variant.available }}"
+    data-product-id="{{ product.id }}"
+    data-current-variant-id="{{ current_variant.id }}"
+    data-initial-quantity="{{ initial_quantity }}"
+    data-default-variant-title="{{ 'products.product.default_title' | t }}"
+  >
+    <div
+      class="sticky-add-to-cart__bar color-{{ settings.popover_color_scheme }}"
+      data-stuck="false"
+      ref="stickyBar"
+      role="region"
+      aria-label="{{ 'products.product.sticky_add_to_cart' | t }}"
+    >
+      {% assign image_to_show = current_variant.featured_image | default: product.featured_image %}
+      {% if image_to_show %}
+        <div class="sticky-add-to-cart__image">
+          {% assign image_alt = image_to_show.alt | default: product.title | escape %}
+          {{
+            image_to_show
+            | image_url: width: 120
+            | image_tag: loading: 'lazy', alt: image_alt, class: 'sticky-add-to-cart__image-img', srcset: null, sizes: null
+          }}
+        </div>
+      {% endif %}
+
+      <div class="sticky-add-to-cart__info">
+        <h3 class="sticky-add-to-cart__title">{{ product.title | escape }}</h3>
+        <div class="sticky-add-to-cart__variant" {% if product.has_only_default_variant %}style="display: none;"{% endif %}>
+          {% unless product.has_only_default_variant %}
+            {% if current_variant != blank %}
+              {% assign variant_title = current_variant.title | escape %}
+            {% endif %}
+            {{ variant_title }}
+          {% endunless %}
+        </div>
+      </div>
+
+      <div class="sticky-add-to-cart__price">
+        {% render 'price', product_resource: product, show_sale_price_first: true %}
+      </div>
+
+      <button
+        type="button"
+        class="sticky-add-to-cart__button add-to-cart-button button"
+        ref="addToCartButton"
+        on:click="/handleAddToCartClick"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        <span class="add-to-cart-text">
+          {% if current_variant.available %}
+            <span class="svg-wrapper add-to-cart-icon">{{- 'icon-add-to-cart.svg' | inline_asset_content -}}</span>
+          {% endif %}
+          <span class="add-to-cart-text__content">
+            <span>
+              {%- if current_variant.available -%}
+                {{- 'products.product.add_to_cart' | t -}}
+              {%- elsif current_variant == blank -%}
+                {{- 'products.product.unavailable' | t -}}
+              {%- else -%}
+                {{- 'products.product.sold_out' | t -}}
+              {%- endif -%}
+            </span>
+            <span
+              ref="quantityDisplay"
+              {% if current_variant.available and initial_quantity > 1 %}style="display: inline;"{% else %}style="display: none;"{% endif %}
+            >
+              ( <span ref="quantityNumber">{{ initial_quantity }}</span> )
+            </span>
+          </span>
+        </span>
+        <span class="add-to-cart__added">
+          <span class="svg-wrapper add-to-cart__added-icon">{{- 'icon-checkmark-burst.svg' | inline_asset_content -}}</span>
+        </span>
+      </button>
+    </div>
+  </sticky-add-to-cart>
+{% endif %}
+
+{% render 'product-information-content',
+  product_media_size: product.media.size,
+  section_id: section.id,
+  settings: section.settings,
+  media_gallery: media_gallery,
+  product_details: product_details,
+  additional_blocks: additional_blocks
+%}
+
+{% schema %}
+{
+  "name": "Goal Poster Main",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "select", "id": "content_width", "label": "Content width", "default": "content-center-aligned", "options": [
+      { "value": "content-center-aligned", "label": "Page" },
+      { "value": "content-full-width", "label": "Full" }
+    ]},
+    { "type": "select", "id": "desktop_media_position", "label": "Media position", "default": "left", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "right", "label": "Right" }
+    ]},
+    { "type": "range", "id": "gap", "label": "Gap", "min": 12, "max": 80, "step": 4, "default": 40 },
+    { "type": "checkbox", "id": "enable_sticky_add_to_cart", "label": "Sticky add to cart", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding-block-start", "label": "Padding top", "min": 0, "max": 80, "step": 4, "default": 24 },
+    { "type": "range", "id": "padding-block-end", "label": "Padding bottom", "min": 0, "max": 80, "step": 4, "default": 24 }
+  ],
+  "blocks": [
+    { "type": "_product-media-gallery" },
+    { "type": "_product-details" }
+  ],
+  "presets": [
+    { "name": "Goal Poster Main" }
+  ]
+}
+{% endschema %}

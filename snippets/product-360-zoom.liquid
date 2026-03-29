@@ -1,0 +1,316 @@
+{% comment %} StudioSip 360° Product Zoom - Phase 2 {% endcomment %}
+
+<div class="studio-sip-360-zoom" data-product-handle="{{ product.handle }}">
+  <div class="360-zoom-container">
+    <div class="360-zoom-main" id="main-image-container">
+      {% if product.featured_image != blank %}
+        <img 
+          src="{{ product.featured_image | image_url: width: 1200 }}" 
+          alt="{{ product.title | escape }}"
+          id="main-product-image"
+          class="main-product-image"
+          width="600"
+          height="600"
+          loading="lazy"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+      
+      <div class="zoom-hint">
+        <span class="zoom-icon">🔍</span>
+        <span class="zoom-text">Hover to see texture detail</span>
+      </div>
+    </div>
+    
+    <div class="360-zoom-controls">
+      <button class="zoom-btn zoom-in" aria-label="Zoom in">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 5v10M5 10h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="zoom-btn zoom-out" aria-label="Zoom out">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M5 10h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="zoom-btn reset-zoom" aria-label="Reset zoom">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 4l12 12M4 16L16 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <div class="360-zoom-gallery">
+    <p class="gallery-label">360° View - Drag to rotate</p>
+    <div class="gallery-grid">
+      {% for image in product.images limit: 4 %}
+        <button 
+          class="gallery-thumb {% if forloop.first %}active{% endif %}" 
+          data-image-src="{{ image | image_url: width: 1200 }}"
+          data-image-alt="{{ image.alt | escape }}"
+          aria-label="View image {{ forloop.index }}"
+        >
+          <img 
+            src="{{ image | image_url: width: 150 }}" 
+            alt="{{ image.alt | escape }}"
+            width="75"
+            height="75"
+            loading="lazy"
+          >
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .studio-sip-360-zoom {
+    font-family: 'Inter', sans-serif;
+    margin: 24px 0;
+  }
+
+  .studio-sip-360-zoom .360-zoom-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #F7F9FB;
+  }
+
+  .studio-sip-360-zoom .360-zoom-main {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  .studio-sip-360-zoom .main-product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .studio-sip-360-zoom .360-zoom-main:hover .main-product-image {
+    transform: scale(1.5);
+    cursor: zoom-out;
+  }
+
+  .studio-sip-360-zoom .zoom-hint {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(51, 54, 59, 0.8);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .studio-sip-360-zoom .360-zoom-main:hover .zoom-hint {
+    opacity: 1;
+  }
+
+  .studio-sip-360-zoom .360-zoom-controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .studio-sip-360-zoom .zoom-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #33363B;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .studio-sip-360-zoom .zoom-btn:hover {
+    background-color: #A3B0A7;
+    color: #ffffff;
+  }
+
+  .studio-sip-360-zoom .360-zoom-gallery {
+    margin-top: 16px;
+  }
+
+  .studio-sip-360-zoom .gallery-label {
+    font-size: 12px;
+    color: #33363B;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .studio-sip-360-zoom .gallery-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .studio-sip-360-zoom .gallery-thumb {
+    flex-shrink: 0;
+    width: 75px;
+    height: 75px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #ffffff;
+    padding: 0;
+    transition: all 0.2s ease;
+  }
+
+  .studio-sip-360-zoom .gallery-thumb:hover {
+    border-color: #A3B0A7;
+  }
+
+  .studio-sip-360-zoom .gallery-thumb.active {
+    border-color: #A3B0A7;
+    box-shadow: 0 0 0 2px rgba(163, 176, 167, 0.3);
+  }
+
+  .studio-sip-360-zoom .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .studio-sip-360-zoom .360-zoom-controls {
+      display: none;
+    }
+    
+    .studio-sip-360-zoom .zoom-hint {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.studio-sip-360-zoom');
+    if (!container) return;
+
+    const mainImage = document.getElementById('main-product-image');
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    const zoomInBtn = container.querySelector('.zoom-in');
+    const zoomOutBtn = container.querySelector('.zoom-out');
+    const resetBtn = container.querySelector('.reset-zoom');
+    
+    let currentScale = 1;
+    const minScale = 1;
+    const maxScale = 3;
+
+    // Thumbnail click handler
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const newSrc = this.dataset.imageSrc;
+        const newAlt = this.dataset.imageAlt;
+        
+        // Update main image
+        if (mainImage) {
+          mainImage.src = newSrc;
+          mainImage.alt = newAlt;
+        }
+        
+        // Update active state
+        thumbs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Reset zoom
+        resetZoom();
+      });
+    });
+
+    // Zoom controls
+    if (zoomInBtn) {
+      zoomInBtn.addEventListener('click', function() {
+        if (currentScale < maxScale) {
+          currentScale += 0.5;
+          applyZoom();
+        }
+      });
+    }
+
+    if (zoomOutBtn) {
+      zoomOutBtn.addEventListener('click', function() {
+        if (currentScale > minScale) {
+          currentScale -= 0.5;
+          applyZoom();
+        }
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetZoom);
+    }
+
+    function applyZoom() {
+      if (mainImage) {
+        mainImage.style.transform = `scale(${currentScale})`;
+      }
+    }
+
+    function resetZoom() {
+      currentScale = 1;
+      if (mainImage) {
+        mainImage.style.transform = 'scale(1)';
+      }
+    }
+
+    // Mouse drag to pan when zoomed
+    const zoomContainer = container.querySelector('.360-zoom-main');
+    if (zoomContainer) {
+      let isDragging = false;
+      let startX, startY, translateX = 0, translateY = 0;
+
+      zoomContainer.addEventListener('mousedown', function(e) {
+        if (currentScale > 1) {
+          isDragging = true;
+          startX = e.clientX - translateX;
+          startY = e.clientY - translateY;
+          zoomContainer.style.cursor = 'grabbing';
+        }
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (isDragging && currentScale > 1) {
+          translateX = e.clientX - startX;
+          translateY = e.clientY - startY;
+          
+          // Limit drag range
+          const maxTranslate = (currentScale - 1) * 200;
+          translateX = Math.max(-maxTranslate, Math.min(maxTranslate, translateX));
+          translateY = Math.max(-maxTranslate, Math.min(maxTranslate, translateY));
+          
+          mainImage.style.transform = `scale(${currentScale}) translate(${translateX}px, ${translateY}px)`;
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          zoomContainer.style.cursor = 'zoom-out';
+        }
+      });
+    }
+  });
+</script>

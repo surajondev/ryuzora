@@ -1,0 +1,394 @@
+{% comment %} StudioSip Live Customization Preview - Bamboo Lid Engraving - Phase 2 {% endcomment %}
+
+<div class="studio-sip-customization" id="engraving-customization">
+  <div class="customization-header">
+    <h3 class="customization-title">Personalize Your StudioSip</h3>
+    <p class="customization-subtitle">Laser engraved on natural bamboo lid</p>
+  </div>
+
+  <div class="customization-preview">
+    <div class="preview-container">
+      {% if product.featured_image != blank %}
+        <img 
+          src="{{ product.featured_image | image_url: width: 800 }}" 
+          alt="StudioSip Bottle Preview"
+          class="preview-image"
+          id="customization-preview-image"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'preview-svg' }}
+      {% endif %}
+      
+      <div class="engraving-overlay" id="engraving-overlay">
+        <span class="engraving-text" id="preview-engraving-text"></span>
+      </div>
+      
+      <div class="bamboo-lid-label">
+        <span class="lid-icon">🎋</span>
+        <span>Bamboo Lid Preview</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="customization-form">
+    <div class="form-group">
+      <label for="engraving-text" class="form-label">
+        Enter your personalization
+        <span class="label-hint">(Max 20 characters)</span>
+      </label>
+      <input 
+        type="text" 
+        id="engraving-text" 
+        name="properties[Engraving Text]"
+        class="form-input"
+        placeholder="Your Name"
+        maxlength="20"
+        autocomplete="off"
+      >
+      <div class="char-count">
+        <span id="char-count">0</span>/20 characters
+      </div>
+    </div>
+
+    <div class="engraving-options">
+      <label class="option-label">Engraving Style</label>
+      <div class="style-options">
+        <label class="style-option">
+          <input type="radio" name="engraving-style" value="classic" checked>
+          <span class="style-card">
+            <span class="style-preview classic">Your Name</span>
+            <span class="style-name">Classic</span>
+          </span>
+        </label>
+        <label class="style-option">
+          <input type="radio" name="engraving-style" value="script">
+          <span class="style-card">
+            <span class="style-preview script">Your Name</span>
+            <span class="style-name">Script</span>
+          </span>
+        </label>
+        <label class="style-option">
+          <input type="radio" name="engraving-style" value="minimal">
+          <span class="style-card">
+            <span class="style-preview minimal">YOUR NAME</span>
+            <span class="style-name">Minimal</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="customization-note">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span>Each engraving is hand-crafted in Thane. Allow 2-3 business days for personalization.</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .studio-sip-customization {
+    background-color: #F7F9FB;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .studio-sip-customization .customization-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .studio-sip-customization .customization-title {
+    font-family: 'Hatton', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #33363B;
+    margin: 0 0 8px 0;
+  }
+
+  .studio-sip-customization .customization-subtitle {
+    font-size: 14px;
+    color: #A3B0A7;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .studio-sip-customization .customization-preview {
+    margin-bottom: 24px;
+  }
+
+  .studio-sip-customization .preview-container {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .studio-sip-customization .preview-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .studio-sip-customization .engraving-overlay {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #D4A574 0%, #8B6914 100%);
+    padding: 8px 16px;
+    border-radius: 4px;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .studio-sip-customization .engraving-text {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #4A3728;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  .studio-sip-customization .bamboo-lid-label {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(163, 176, 167, 0.9);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .studio-sip-customization .customization-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .studio-sip-customization .form-group {
+    margin-bottom: 20px;
+  }
+
+  .studio-sip-customization .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #33363B;
+    margin-bottom: 8px;
+  }
+
+  .studio-sip-customization .label-hint {
+    font-weight: 400;
+    color: #A3B0A7;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+
+  .studio-sip-customization .form-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 2px solid #E6E6E6;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #33363B;
+    transition: all 0.3s ease;
+  }
+
+  .studio-sip-customization .form-input:focus {
+    outline: none;
+    border-color: #A3B0A7;
+    box-shadow: 0 0 0 3px rgba(163, 176, 167, 0.15);
+  }
+
+  .studio-sip-customization .form-input::placeholder {
+    color: #A3B0A7;
+  }
+
+  .studio-sip-customization .char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #A3B0A7;
+    margin-top: 6px;
+  }
+
+  .studio-sip-customization .engraving-options {
+    margin-bottom: 20px;
+  }
+
+  .studio-sip-customization .option-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #33363B;
+    margin-bottom: 12px;
+  }
+
+  .studio-sip-customization .style-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .studio-sip-customization .style-option {
+    flex: 1;
+    min-width: 100px;
+    cursor: pointer;
+  }
+
+  .studio-sip-customization .style-option input {
+    display: none;
+  }
+
+  .studio-sip-customization .style-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 12px;
+    border: 2px solid #E6E6E6;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .studio-sip-customization .style-option input:checked + .style-card {
+    border-color: #A3B0A7;
+    background: rgba(163, 176, 167, 0.1);
+  }
+
+  .studio-sip-customization .style-preview {
+    font-size: 12px;
+    color: #33363B;
+    margin-bottom: 8px;
+    font-family: 'Georgia', serif;
+  }
+
+  .studio-sip-customization .style-preview.script {
+    font-style: italic;
+    font-family: 'Brush Script MT', cursive;
+  }
+
+  .studio-sip-customization .style-preview.minimal {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  .studio-sip-customization .style-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #A3B0A7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .studio-sip-customization .customization-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    background: rgba(163, 176, 167, 0.1);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #33363B;
+    line-height: 1.5;
+  }
+
+  .studio-sip-customization .customization-note svg {
+    flex-shrink: 0;
+    color: #A3B0A7;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 480px) {
+    .studio-sip-customization {
+      padding: 16px;
+    }
+
+    .studio-sip-customization .customization-title {
+      font-size: 20px;
+    }
+
+    .studio-sip-customization .style-options {
+      flex-direction: column;
+    }
+
+    .studio-sip-customization .style-option {
+      min-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('engraving-text');
+    const previewText = document.getElementById('preview-engraving-text');
+    const charCount = document.getElementById('char-count');
+    const engravingOverlay = document.getElementById('engraving-overlay');
+    const styleInputs = document.querySelectorAll('input[name="engraving-style"]');
+
+    if (!input || !previewText) return;
+
+    // Update preview on input
+    input.addEventListener('input', function() {
+      const text = this.value.trim();
+      const maxLength = parseInt(this.getAttribute('maxlength'));
+      
+      // Update character count
+      charCount.textContent = text.length;
+      
+      // Update preview text
+      if (text.length > 0) {
+        previewText.textContent = text;
+        engravingOverlay.style.display = 'block';
+      } else {
+        previewText.textContent = 'Your Name';
+        engravingOverlay.style.display = 'block';
+      }
+
+      // Update style based on selection
+      updateStyle();
+    });
+
+    // Style change handler
+    styleInputs.forEach(input => {
+      input.addEventListener('change', updateStyle);
+    });
+
+    function updateStyle() {
+      const selectedStyle = document.querySelector('input[name="engraving-style"]:checked').value;
+      previewText.className = 'engraving-text';
+      
+      switch(selectedStyle) {
+        case 'script':
+          previewText.style.fontStyle = 'italic';
+          previewText.style.fontFamily = '"Brush Script MT", cursive';
+          break;
+        case 'minimal':
+          previewText.style.fontStyle = 'normal';
+          previewText.style.fontFamily = '"Arial", sans-serif';
+          previewText.style.fontWeight = '600';
+          previewText.style.letterSpacing = '2px';
+          break;
+        default:
+          previewText.style.fontStyle = 'italic';
+          previewText.style.fontFamily = '"Georgia", serif';
+      }
+    }
+
+    // Initialize with placeholder
+    updateStyle();
+  });
+</script>

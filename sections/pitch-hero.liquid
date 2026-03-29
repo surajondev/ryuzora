@@ -1,0 +1,82 @@
+<div class="section-background color-{{ section.settings.color_scheme }} goal-pitch-texture"></div>
+<section class="section section--{{ section.settings.section_width }} pitch-hero color-{{ section.settings.color_scheme }}">
+  <div class="pitch-hero__inner">
+    <div class="pitch-hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <div class="pitch-hero__eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+      {% if section.settings.heading_prefix != blank or section.settings.heading_accent != blank or section.settings.heading_suffix != blank %}
+        <h1 class="pitch-hero__title">
+          {{ section.settings.heading_prefix }}
+          {% if section.settings.heading_accent != blank %}
+            <span class="pitch-hero__accent">{{ section.settings.heading_accent }}</span>
+          {% endif %}
+          {{ section.settings.heading_suffix }}
+        </h1>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="pitch-hero__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        <a class="pitch-hero__button" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+      {% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="pitch-hero__tabs">
+          {% for block in section.blocks %}
+            <a class="pitch-hero__tab" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+              {{ block.settings.label }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="pitch-hero__media">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pitch Hero",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "RYUZORAPOSTER" },
+    { "type": "text", "id": "heading_prefix", "label": "Heading prefix", "default": "RELIVE THE" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "MOMENT" },
+    { "type": "text", "id": "heading_suffix", "label": "Heading suffix", "default": ". OWN THE STORY." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Your favorite football moments, reimagined as premium art prints and posters." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "hero_tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Posters" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pitch Hero",
+      "blocks": [
+        { "type": "hero_tab", "settings": { "label": "Posters" } },
+        { "type": "hero_tab", "settings": { "label": "Sports" } },
+        { "type": "hero_tab", "settings": { "label": "Goal" } },
+        { "type": "hero_tab", "settings": { "label": "The Atlantic" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

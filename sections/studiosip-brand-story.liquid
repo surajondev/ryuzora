@@ -1,0 +1,269 @@
+{% comment %} StudioSip Brand Story - Phase 3 {% endcomment %}
+
+{%- style -%}
+  .studio-sip-brand-story {
+    padding: 100px 20px;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .studio-sip-brand-story::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(135deg, #F7F9FB 0%, #ffffff 100%);
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  @media (max-width: 768px) {
+    .studio-sip-brand-story::before {
+      display: none;
+    }
+  }
+
+  .studio-sip-brand-story .story-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 900px) {
+    .studio-sip-brand-story .story-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .studio-sip-brand-story .story-content {
+    padding: 20px;
+  }
+
+  .studio-sip-brand-story .story-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #A3B0A7;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .studio-sip-brand-story .story-title {
+    font-family: 'Hatton', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #33363B;
+    margin: 0 0 24px 0;
+    line-height: 1.1;
+  }
+
+  .studio-sip-brand-story .story-subtitle {
+    font-family: 'Hatton', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #A3B0A7;
+    margin: 0 0 24px 0;
+    font-style: italic;
+  }
+
+  .studio-sip-brand-story .story-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.8;
+  }
+
+  .studio-sip-brand-story .story-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #E6E6E6;
+  }
+
+  .studio-sip-brand-story .stat-item {
+    text-align: center;
+  }
+
+  .studio-sip-brand-story .stat-number {
+    font-family: 'Hatton', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #A3B0A7;
+    display: block;
+    line-height: 1;
+  }
+
+  .studio-sip-brand-story .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+    display: block;
+  }
+
+  .studio-sip-brand-story .story-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .studio-sip-brand-story .story-image {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(51, 54, 59, 0.1);
+  }
+
+  .studio-sip-brand-story .story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .studio-sip-brand-story .story-image:hover img {
+    transform: scale(1.05);
+  }
+
+  .studio-sip-brand-story .story-image:first-child {
+    grid-row: span 2;
+  }
+
+  .studio-sip-brand-story .thane-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #A3B0A7;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 24px;
+  }
+{%- endstyle -%}
+
+<div class="studio-sip-brand-story">
+  <div class="story-container">
+    <div class="story-content">
+      <span class="story-label">Our Story</span>
+      <h2 class="story-title">The Workspace Luxury Flask</h2>
+      <p class="story-subtitle">Designed in Thane, loved worldwide</p>
+      
+      <p class="story-description">
+        StudioSip was born from a simple idea: hydration should be an experience, not just a necessity. 
+        We combine the sourcing advantages of the Mumbai-Thane industrial corridor with premium craftsmanship 
+        to create bottles that elevate your workspace.
+      </p>
+      
+      <p class="story-description">
+        Unlike mass-market bottles that are smooth, generic, and cheap, StudioSip offers the 
+        <strong>"Clean Desk" aesthetic</strong> — featuring the tactile feel of vertical-ribbed silicone 
+        and the natural warmth of hand-engraved bamboo.
+      </p>
+
+      <div class="story-stats">
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Daily Engravings</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">10K+</span>
+          <span class="stat-label">Happy Customers</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">4.9</span>
+          <span class="stat-label">Star Rating</span>
+        </div>
+      </div>
+
+      <div class="thane-badge">
+        <span>📍</span>
+        <span>Crafted in Thane, Maharashtra</span>
+      </div>
+    </div>
+
+    <div class="story-images">
+      <div class="story-image">
+        {% if section.settings.image_1 != blank %}
+          <img 
+            src="{{ section.settings.image_1 | image_url: width: 600 }}" 
+            alt="StudioSip artisan crafting"
+            width="300"
+            height="400"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="story-image">
+        {% if section.settings.image_2 != blank %}
+          <img 
+            src="{{ section.settings.image_2 | image_url: width: 400 }}" 
+            alt="StudioSip product detail"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="story-image">
+        {% if section.settings.image_3 != blank %}
+          <img 
+            src="{{ section.settings.image_3 | image_url: width: 400 }}" 
+            alt="StudioSip lifestyle"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "StudioSip Brand Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1 (Large)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "StudioSip Brand Story"
+    }
+  ]
+}
+{% endschema %}

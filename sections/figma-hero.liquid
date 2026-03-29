@@ -1,0 +1,46 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="section section--{{ section.settings.section_width }} figma-hero color-{{ section.settings.color_scheme }}">
+  <div class="figma-hero__inner">
+    <div class="figma-hero__card">
+      {% if section.settings.heading != blank %}
+        <h1 class="figma-hero__title">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="figma-hero__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.code_text != blank %}
+        <div class="figma-hero__code">{{ section.settings.code_text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        <a class="figma-hero__button" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+    <div class="figma-hero__media">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Figma Hero",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "THE PERFECT FOOTBALL GIFT" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Code: MEZZALA for 12% off all items" },
+    { "type": "text", "id": "code_text", "label": "Code line", "default": "Code: MEZZALA for 12% off all items" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [
+    { "name": "Figma Hero" }
+  ]
+}
+{% endschema %}

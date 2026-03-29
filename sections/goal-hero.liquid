@@ -1,0 +1,46 @@
+<div class="section-background color-{{ section.settings.color_scheme }} goal-pitch-texture"></div>
+<section class="section section--{{ section.settings.section_width }} goal-hero goal-section color-{{ section.settings.color_scheme }}">
+  {% if section.settings.image != blank %}
+    <div class="goal-hero__media">
+      {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw' }}
+    </div>
+  {% endif %}
+  <div class="goal-hero__overlay"></div>
+  <div class="goal-hero__content">
+    {% if section.settings.eyebrow != blank %}
+      <div class="goal-hero__eyebrow">{{ section.settings.eyebrow | escape }}</div>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h1 class="goal-hero__title">{{ section.settings.heading | escape }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="goal-hero__subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% if section.settings.button_label != blank %}
+      <a class="goal-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Goal Hero",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Matchday Memories" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Legendary Goals. Posterized." },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Turn iconic football moments into museum-grade posters. Built for true supporters.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Posters" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [
+    { "name": "Goal Hero" }
+  ]
+}
+{% endschema %}

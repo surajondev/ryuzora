@@ -1,0 +1,64 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="section section--{{ section.settings.section_width }} pitch-gallery color-{{ section.settings.color_scheme }}">
+  <div class="pitch-gallery__header">
+    {% if section.settings.heading != blank %}
+      <h2 class="pitch-section-title">{{ section.settings.heading }}</h2>
+    {% endif %}
+  </div>
+  <div class="pitch-gallery__grid">
+    {% for block in section.blocks %}
+      <a class="pitch-gallery__card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <div class="pitch-gallery__image">
+            {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+          </div>
+        {% endif %}
+        <div class="pitch-gallery__content">
+          {% if block.settings.title != blank %}
+            <h3 class="pitch-gallery__title">{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.subtitle != blank %}
+            <p class="pitch-gallery__subtitle">{{ block.settings.subtitle }}</p>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pitch Gallery",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BROWSE THE GALLERY" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_card",
+      "name": "Gallery card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Champions League" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Moments you never forget" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pitch Gallery",
+      "blocks": [
+        { "type": "gallery_card" },
+        { "type": "gallery_card" },
+        { "type": "gallery_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

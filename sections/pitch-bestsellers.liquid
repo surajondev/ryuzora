@@ -1,0 +1,54 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="section section--{{ section.settings.section_width }} pitch-bestsellers color-{{ section.settings.color_scheme }}">
+  <div class="pitch-bestsellers__header">
+    {% if section.settings.heading != blank %}
+      <h2 class="pitch-section-title">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.view_all_label != blank %}
+      <a class="pitch-bestsellers__link" href="{{ section.settings.view_all_link }}">{{ section.settings.view_all_label }}</a>
+    {% endif %}
+  </div>
+
+  {% assign collection = section.settings.collection %}
+  {% if collection != blank %}
+    <div class="pitch-bestsellers__grid">
+      {% for product in collection.products limit: section.settings.products_count %}
+        <a class="pitch-bestsellers__card" href="{{ product.url }}">
+          <div class="pitch-bestsellers__image">
+            {% if product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+          <div class="pitch-bestsellers__meta">
+            <div class="pitch-bestsellers__title">{{ product.title }}</div>
+            <div class="pitch-bestsellers__price">{{ product.price | money }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="goal-card">Select a collection to show bestsellers.</div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Pitch Bestsellers",
+  "class": "section-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BESTSELLING PRINTS" },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "VIEW ALL POSTERS" },
+    { "type": "url", "id": "view_all_link", "label": "View all link" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_count", "label": "Products", "min": 4, "max": 12, "step": 1, "default": 4 },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [
+    { "name": "Pitch Bestsellers" }
+  ]
+}
+{% endschema %}

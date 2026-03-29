@@ -1,0 +1,54 @@
+<div class="section-background color-{{ section.settings.color_scheme }} goal-pitch-texture"></div>
+<section class="section section--{{ section.settings.section_width }} goal-section color-{{ section.settings.color_scheme }}">
+  {% if section.settings.heading != blank %}
+    <h2 class="goal-section__title">{{ section.settings.heading | escape }}</h2>
+  {% endif %}
+  {% assign featured = section.settings.product %}
+  {% if featured != blank %}
+    <div class="goal-product">
+      <div class="goal-product__grid">
+        <div class="goal-product__media">
+          {{ featured.featured_media | image_url: width: 1400 | image_tag: loading: 'lazy' }}
+        </div>
+        <div>
+          <div class="goal-badges">
+            {% if featured.metafields.custom.competition != blank %}
+              <span class="goal-badge">{{ featured.metafields.custom.competition }}</span>
+            {% endif %}
+            {% if featured.metafields.custom.match_date != blank %}
+              <span class="goal-badge">{{ featured.metafields.custom.match_date }}</span>
+            {% endif %}
+          </div>
+          <h3 class="goal-product__title">{{ featured.title | escape }}</h3>
+          <div class="goal-product__price">
+            {% render 'price', product_resource: featured, show_sale_price_first: true %}
+          </div>
+          {% if featured.description != blank %}
+            <div class="rte">{{ featured.description | truncate: 220 }}</div>
+          {% endif %}
+          <a class="goal-button" href="{{ featured.url }}">View Poster</a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="goal-card">Select a featured product.</div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Goal Featured Match",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured Match" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [
+    { "name": "Goal Featured Match" }
+  ]
+}
+{% endschema %}

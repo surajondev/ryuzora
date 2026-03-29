@@ -1,0 +1,52 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="section section--{{ section.settings.section_width }} goal-section color-{{ section.settings.color_scheme }}">
+  {% if section.settings.heading != blank %}
+    <h2 class="goal-section__title">{{ section.settings.heading | escape }}</h2>
+  {% endif %}
+  <div class="goal-grid">
+    {% for block in section.blocks %}
+      {% assign collection = block.settings.collection %}
+      <a class="goal-card" href="{{ collection.url }}" {{ block.shopify_attributes }}>
+        {% if collection.image %}
+          {{ collection.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% endif %}
+        <div class="goal-card__title">{{ block.settings.label | default: collection.title | escape }}</div>
+        {% if block.settings.subtext != blank %}
+          <div class="goal-card__text">{{ block.settings.subtext }}</div>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Goal Featured Collections",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop By League" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "richtext", "id": "subtext", "label": "Subtext" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Goal Featured Collections", "blocks": [
+      { "type": "collection" },
+      { "type": "collection" },
+      { "type": "collection" }
+    ] }
+  ]
+}
+{% endschema %}

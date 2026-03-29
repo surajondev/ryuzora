@@ -1,0 +1,35 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section class="section section--{{ section.settings.section_width }} figma-newsletter color-{{ section.settings.color_scheme }}">
+  <div class="figma-newsletter__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="figma-newsletter__title">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="figma-newsletter__subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% form 'customer', class: 'figma-newsletter__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input class="figma-newsletter__input" type="email" name="contact[email]" placeholder="Email" required>
+      <button class="figma-newsletter__button" type="submit">{{ section.settings.button_label }}</button>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Figma Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Subscribe to our emails" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Be the first to know about new collections and exclusive offers." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Submit" },
+    { "type": "select", "id": "section_width", "label": "Section width", "default": "full-width", "options": [
+      { "value": "page-width", "label": "Page" },
+      { "value": "full-width", "label": "Full" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+  ],
+  "presets": [
+    { "name": "Figma Newsletter" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,235 @@
+{% comment %} StudioSip Social Feed - Instagram Grid - Phase 4 {% endcomment %}
+
+{%- style -%}
+  .studio-sip-social-feed {
+    padding: 80px 20px;
+    background: #F7F9FB;
+  }
+
+  .studio-sip-social-feed .feed-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .studio-sip-social-feed .feed-title {
+    font-family: 'Hatton', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #33363B;
+    margin: 0 0 12px 0;
+  }
+
+  .studio-sip-social-feed .feed-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #A3B0A7;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .studio-sip-social-feed .feed-subtitle a {
+    color: #33363B;
+    text-decoration: underline;
+  }
+
+  .studio-sip-social-feed .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .studio-sip-social-feed .instagram-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .studio-sip-social-feed .instagram-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    
+    .studio-sip-social-feed .feed-title {
+      font-size: 32px;
+    }
+  }
+
+  .studio-sip-social-feed .instagram-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #E6E6E6;
+    cursor: pointer;
+  }
+
+  .studio-sip-social-feed .instagram-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .studio-sip-social-feed .instagram-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .studio-sip-social-feed .instagram-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(51, 54, 59, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .studio-sip-social-feed .instagram-item:hover .instagram-overlay {
+    opacity: 1;
+  }
+
+  .studio-sip-social-feed .overlay-content {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .studio-sip-social-feed .overlay-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .studio-sip-social-feed .overlay-text {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .studio-sip-social-feed .feed-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .studio-sip-social-feed .follow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: #33363B;
+    color: #ffffff;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .studio-sip-social-feed .follow-btn:hover {
+    background: #A3B0A7;
+    transform: translateY(-2px);
+  }
+{%- endstyle -%}
+
+<div class="studio-sip-social-feed">
+  <div class="feed-header">
+    <h2 class="feed-title">{{ section.settings.title | default: "@studiosip" }}</h2>
+    <p class="feed-subtitle">Follow us on Instagram <a href="{{ section.settings.instagram_link }}">@studiosip</a></p>
+  </div>
+
+  <div class="instagram-grid">
+    {% for i in (1..6) %}
+      <div class="instagram-item">
+        {% assign image_key = 'image_' | append: i %}
+        {% if section.settings[image_key] != blank %}
+          <img 
+            src="{{ section.settings[image_key] | image_url: width: 400 }}" 
+            alt="StudioSip Instagram"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {% else %}
+          <img 
+            src="https://placehold.co/400x400/F7F9FB/A3B0A7?text=Instagram+{{ i }}" 
+            alt="StudioSip Instagram {{ i }}"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {% endif %}
+        
+        <div class="instagram-overlay">
+          <div class="overlay-content">
+            <div class="overlay-icon">❤️</div>
+            <div class="overlay-text">Like</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="feed-cta">
+    <a href="{{ section.settings.instagram_link | default: 'https://instagram.com' }}" class="follow-btn" target="_blank" rel="noopener">
+      <span>📷</span>
+      Follow @studiosip
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "StudioSip Social Feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "#StudioSip",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "StudioSip Social Feed"
+    }
+  ]
+}
+{% endschema %}
