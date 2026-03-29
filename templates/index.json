@@ -140,7 +140,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "text": "<h3>BESTSELLER<\/h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -166,9 +166,9 @@
               "type": "_product-list-button",
               "name": "t:names.product_list_button",
               "settings": {
-                "label": "View all",
+                "label": "VIEW ALL",
                 "open_in_new_tab": false,
-                "style_class": "link",
+                "style_class": "button-secondary",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -277,7 +277,7 @@
         "collection": "all",
         "layout_type": "grid",
         "carousel_on_mobile": false,
-        "max_products": 8,
+        "max_products": 10,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
@@ -292,10 +292,217 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "media-with-content_why_choose": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify:\/\/shop_images\/why-choose-ryuzora-placeholder.jpg"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Why Choose Ryuzora Design?<\/h2>",
+                "type_preset": "h2",
+                "padding-block-end": 12
+              }
+            },
+            "subtext": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Ryuzora Designs brings the world together with Football Art, we know how important your club means to YOU.<br><br>That's why we use the finest quality materials to bring your football memories to LIFE.<\/p>",
+                "type_preset": "paragraph",
+                "padding-block-end": 32
+              }
+            },
+            "button": {
+              "type": "button",
+              "settings": {
+                "label": "About Us",
+                "link": "shopify:\/\/pages\/about-us",
+                "style_class": "button-secondary"
+              }
+            }
+          },
+          "block_order": [
+            "heading",
+            "subtext",
+            "button"
+          ]
+        }
+      },
+      "block_order": [
+        "media",
+        "content"
+      ],
+      "name": "Editorial (Why Choose Use)",
+      "settings": {
+        "media_position": "left",
+        "media_width": "medium",
+        "media_height": "auto",
+        "section_width": "page-width",
+        "extend_media": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "media-with-content_custom_posters": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify:\/\/shop_images\/custom-posters-placeholder.jpg"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Easy To Design Custom Posters<\/h2>",
+                "type_preset": "h2",
+                "padding-block-end": 12
+              }
+            },
+            "subtext": {
+              "type": "text",
+              "settings": {
+                "text": "<p>From Your Local Football Team, Sunday League or even your Football Manager team! ANYTING is Possible, to remember your ICONIC Football Moment forever.<\/p>",
+                "type_preset": "paragraph",
+                "padding-block-end": 32
+              }
+            },
+            "button": {
+              "type": "button",
+              "settings": {
+                "label": "Custom Posters",
+                "link": "shopify:\/\/collections\/all",
+                "style_class": "button-secondary"
+              }
+            }
+          },
+          "block_order": [
+            "heading",
+            "subtext",
+            "button"
+          ]
+        }
+      },
+      "block_order": [
+        "media",
+        "content"
+      ],
+      "name": "Editorial (Custom Posters)",
+      "settings": {
+        "media_position": "right",
+        "media_width": "medium",
+        "media_height": "auto",
+        "section_width": "page-width",
+        "extend_media": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "media-with-content_occasions": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify:\/\/shop_images\/occasions-placeholder.jpg"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Perfect For Any Big Occasion<\/h2>",
+                "type_preset": "h2",
+                "padding-block-end": 12
+              }
+            },
+            "subtext": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Thinking of a Birthday Gift Idea? You got some free wall space in your Bedroom? Or maybe to make your Gaming set-up stand out!<br><br>For whatever type of football fan, Ryuzora has you covered.<\/p>",
+                "type_preset": "paragraph",
+                "padding-block-end": 32
+              }
+            },
+            "button": {
+              "type": "button",
+              "settings": {
+                "label": "Explore",
+                "link": "shopify:\/\/collections\/all",
+                "style_class": "button-secondary"
+              }
+            }
+          },
+          "block_order": [
+            "heading",
+            "subtext",
+            "button"
+          ]
+        }
+      },
+      "block_order": [
+        "media",
+        "content"
+      ],
+      "name": "Editorial (Occasions)",
+      "settings": {
+        "media_position": "left",
+        "media_width": "medium",
+        "media_height": "auto",
+        "section_width": "page-width",
+        "extend_media": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "product_list_fa6P9H",
+    "media-with-content_why_choose",
+    "media-with-content_custom_posters",
+    "media-with-content_occasions"
   ]
 }
