@@ -56,57 +56,41 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>JOIN THE SQUAD<\/h2>",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "alignment": "center",
+                "type_preset": "h2",
+                "case": "uppercase",
+                "padding-block-end": 12
+              }
             },
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>Get early access to limited edition drops, secret sales, and exclusive football stories.<\/p>",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "alignment": "center",
+                "type_preset": "paragraph",
+                "padding-block-end": 24
+              }
+            },
+            "text_footnote": {
+              "type": "text",
+              "settings": {
+                "text": "<p>NO SPAM. ONLY THE BEAUTIFUL GAME.<\/p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "paragraph"
+              }
             }
           },
           "block_order": [
             "text_LWt8Pz",
-            "text_f9CFLH"
+            "text_f9CFLH",
+            "text_footnote"
           ]
         },
         "email_signup_crihX7": {
@@ -115,6 +99,7 @@
             "width": "fill",
             "custom_width": 100,
             "inherit_color_scheme": true,
+            "placeholder": "Your Pitch Address (Email)",
             "heading": "",
             "heading_preset": "h3",
             "color_scheme": "",
@@ -122,13 +107,13 @@
             "border_width": 1,
             "border_radius": 100,
             "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
+            "style_class": "button-primary",
+            "display_type": "text",
+            "label": "SUBSCRIBE",
             "integrated_button": true,
-            "button_type_preset": "paragraph",
+            "button_type_preset": "button",
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -143,63 +128,58 @@
       "settings": {
         "section_width": "page-width",
         "gap": 20,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "color_scheme": "scheme-4",
+        "padding-block-start": 64,
+        "padding-block-end": 64,
+        "style_class": "footer-rebrand--pill"
       }
     },
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
+        "branding": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>PITCH & POSTER</h3>",
+            "alignment": "center",
+            "type_preset": "h4",
+            "case": "uppercase",
+            "padding-block-end": 16
+          }
+        },
+        "footer_links_custom": {
+          "type": "text",
+          "settings": {
+            "text": "<ul><li><a href=\"\/policies\/shipping-policy\">RETURNS & SHIPPING<\/a><\/li><li><a href=\"\/pages\/track-order\">TRACK ORDER<\/a><\/li><li><a href=\"\/policies\/privacy-policy\">PRIVACY POLICY<\/a><\/li><li><a href=\"\/policies\/terms-of-service\">TERMS OF SERVICE<\/a><\/li><\/ul>",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "case": "uppercase",
+            "padding-block-end": 16
+          }
+        },
         "footer_copyright_jweRK8": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "show_powered_by": false,
             "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "footer_policy_list_VCdnpa": {
-          "type": "footer-policy-list",
-          "settings": {
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "social_links_Ew63Kq": {
-          "type": "social-links",
-          "settings": {
-            "facebook_url": "https://www.facebook.com/",
-            "instagram_url": "https://www.instagram.com/",
-            "youtube_url": "https://www.youtube.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "twitter_url": "https://x.com/",
-            "threads_url": "",
-            "linkedin_url": "",
-            "bluesky_url": "",
-            "snapchat_url": "",
-            "pinterest_url": "",
-            "tumblr_url": "",
-            "vimeo_url": "",
-            "custom_url": ""
+            "case": "uppercase",
+            "custom_text": "© 2024 Ryuzora Design. ENGINEERED FOR THE BEAUTIFUL GAME."
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa",
-        "social_links_Ew63Kq"
+        "branding",
+        "footer_links_custom",
+        "footer_copyright_jweRK8"
       ],
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
         "gap": 24,
         "divider_thickness": 0,
-        "color_scheme": "",
-        "padding-block-start": 20,
+        "color_scheme": "scheme-5",
+        "padding-block-start": 48,
         "padding-block-end": 48
       }
     }

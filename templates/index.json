@@ -59,21 +59,12 @@
                   "settings": {
                     "label": "SHOP ALL",
                     "link": "shopify:\/\/collections\/all",
-                    "style_class": "button-primary"
-                  }
-                },
-                "button_secondary": {
-                  "type": "button",
-                  "settings": {
-                    "label": "LIMITED DROPS",
-                    "link": "shopify:\/\/collections\/all",
-                    "style_class": "button-secondary"
+                    "style_class": "button"
                   }
                 }
               },
               "block_order": [
-                "button_primary",
-                "button_secondary"
+                "button_primary"
               ]
             }
           },
@@ -334,7 +325,7 @@
               "settings": {
                 "label": "About Us",
                 "link": "shopify:\/\/pages\/about-us",
-                "style_class": "button-secondary"
+                "style_class": "button"
               }
             }
           },
@@ -402,7 +393,7 @@
               "settings": {
                 "label": "Custom Posters",
                 "link": "shopify:\/\/collections\/all",
-                "style_class": "button-secondary"
+                "style_class": "button"
               }
             }
           },
@@ -470,7 +461,7 @@
               "settings": {
                 "label": "Explore",
                 "link": "shopify:\/\/collections\/all",
-                "style_class": "button-secondary"
+                "style_class": "button"
               }
             }
           },
