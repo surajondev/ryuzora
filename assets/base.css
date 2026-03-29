@@ -23,7 +23,30 @@ body {
   --surface-transition-timing: var(--ease-out-quad);
   --submenu-animation-speed: 360ms;
   --submenu-animation-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Design System Utilities - The Editorial Playbook */
+  --glass-blur: blur(12px);
+  --glass-opacity: 0.85;
+  --spring-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Tonal Layering Utilities */
+.surface-container-low { background-color: #f3f3f3; }
+.surface-container-highest { background-color: #e2e2e2; }
+.surface-container-lowest { background-color: #ffffff; }
+
+.glass-morphism {
+  backdrop-filter: var(--glass-blur);
+  background-color: rgb(var(--color-background-rgb) / var(--glass-opacity));
+}
+
+.asymmetric-layout {
+  margin-left: var(--margin-6xl);
+  margin-right: 0;
+}
+
+.rounded-sm { border-radius: 0.125rem; }
+
 
 html {
   /* Firefox */
