@@ -1,0 +1,220 @@
+{%- liquid
+  assign section_settings = section.settings
+-%}
+
+<div
+  class="testimonial-carousel-wrapper color-{{ section_settings.color_scheme }} gradient"
+  style="padding-block-start: {{ section_settings.padding_top }}px; padding-block-end: {{ section_settings.padding_bottom }}px;"
+>
+  {%- if section_settings.title != blank -%}
+    <div class="page-width">
+      <h2 class="testimonial-carousel__title {{ section_settings.heading_size }}">{{ section_settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="testimonial-carousel-container scroll-trigger animate--slide-in">
+    <div class="testimonial-carousel" id="TestimonialCarousel-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__header">
+            <div class="testimonial-card__avatar" style="background-color: {{ block.settings.avatar_bg_color }};">
+              <span>{{ block.settings.author | slice: 0 | upcase }}</span>
+            </div>
+            <div class="testimonial-card__info">
+              <h4 class="testimonial-card__author">{{ block.settings.author | escape }}</h4>
+              <div class="testimonial-card__stars">
+                {%- for i in (1..5) -%}
+                  <span class="star">★</span>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card__text rte">
+            {{ block.settings.text }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .testimonial-carousel-wrapper {
+    overflow: hidden;
+  }
+
+  .testimonial-carousel__title {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .testimonial-carousel-container {
+    padding-bottom: 20px;
+  }
+
+  .testimonial-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding: 0 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .testimonial-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(85% - 16px);
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 200px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .testimonial-card {
+      flex: 0 0 400px;
+    }
+  }
+
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__author {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .testimonial-card__stars {
+    color: #fcd400; /* Gold */
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+
+  .testimonial-card__text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .testimonial-card__text p {
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Testimonial Carousel",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Customer Stories"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Aditi Patel"
+        },
+        {
+          "type": "color",
+          "id": "avatar_bg_color",
+          "label": "Avatar Background Color",
+          "default": "#e9a8b1"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "<p>Beyond the physical support I feel more confident when I'm wearing it. I naturally stand taller. Got compliments at work and when I told colleagues it was a posture bra they were all curious.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Carousel",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial", "settings": { "author": "Nikhil R.", "avatar_bg_color": "#a8c9e9" } },
+        { "type": "testimonial", "settings": { "author": "Priya S.", "avatar_bg_color": "#a8e9ba" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -4292,3 +4292,162 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
+
+/* Product Page High-Conversion Editorial Styles */
+
+/* Urgency Inventory Badge */
+product-inventory.spacing-style {
+  background-color: #fff5f5 !important;
+  border: 1px solid #ff4d4f !important;
+  border-left: 4px solid #ff4d4f !important;
+  padding: 12px 16px !important;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.product-inventory__text {
+  color: #ff4d4f !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem !important;
+}
+
+.product-inventory__icon-low {
+  color: #ff4d4f !important;
+}
+
+/* Trust Bar Styling - Forced Branding */
+[data-block-id*="trust_bar"] {
+  background-color: #002d1c !important;
+  background: #002d1c !important; /* Double fallback */
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 24px 16px !important;
+  color: #ffffff !important;
+}
+
+[data-block-id*="trust_bar"] .group-block {
+    justify-content: space-around !important;
+    align-items: center !important;
+}
+
+/* Force centered stacking for each trust item */
+[data-block-id*="trust_bar"] .group-block > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+[data-block-id*="trust_bar"] .product-inventory__icon,
+[data-block-id*="trust_bar"] .icon-block,
+[data-block-id*="trust_bar"] svg {
+    color: #ffffff !important;
+    margin-bottom: 4px;
+}
+
+[data-block-id*="trust_bar"] strong,
+[data-block-id*="trust_bar"] p {
+    color: #ffffff !important;
+    margin: 0 !important;
+}
+
+
+
+/* Secure Checkout Badge Holder */
+[data-block-id*="secure_checkout_badge"] {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px !important;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-block-id*="secure_checkout_badge"]::before {
+    content: "100% SECURE CHECKOUT";
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #444;
+}
+
+/* Triple UGC Videos Layout */
+[data-block-id*="ugc_videos"] > .group-block {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
+}
+
+@media screen and (max-width: 749px) {
+  [data-block-id*="ugc_videos"] > .group-block {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.ugc-video-item video {
+  border-radius: 12px;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+}
+
+/* Testimonial Review Cards */
+[data-block-id*="testimonials"] .review-card {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+[data-block-id*="accordions"] .accordion__title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Trust Badge Label */
+.badge-yellow {
+    background-color: var(--brand-yellow);
+    color: #002d1c;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+/* Store Review Star Styling */
+.store-review-link {
+    text-decoration: none;
+    color: var(--color-foreground);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+
+.store-review-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.store-review-link::first-letter,
+.store-review-link:contains("★") {
+    color: #887e00; /* Gold/Bronze stars */
+}
+
+/* Specific star color override */
+.store-review-link {
+    color: #002d1c;
+}
+
+.store-review-link:before {
+    content: ""; /* Placeholder for logic if needed */
+}
+
+

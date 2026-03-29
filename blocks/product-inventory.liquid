@@ -3,41 +3,49 @@
 {%- liquid
   assign block_settings = block.settings
   assign variant = closest.product.selected_or_first_available_variant
-  if variant.inventory_management == 'shopify'
-    assign inventory_managed = true
-  endif
-  assign inventory_quantity = variant.inventory_quantity
-  assign inventory_policy = variant.inventory_policy
-  assign threshold = block_settings.inventory_threshold
+  
+  if block_settings.force_urgency
+    assign status = 'low'
+    assign inventory_text = block_settings.urgency_text
+  else
+    if variant.inventory_management == 'shopify'
+      assign inventory_managed = true
+    endif
+    assign inventory_quantity = variant.inventory_quantity
+    assign inventory_policy = variant.inventory_policy
+    assign threshold = block_settings.inventory_threshold
 
-  if inventory_managed
-    if inventory_quantity > 0
-      if inventory_quantity <= threshold
-        assign status = 'low'
-        assign show_quantity = block_settings.show_inventory_quantity
-        if show_quantity == false
-          assign translation_key = 'content.inventory_low_stock'
+    if inventory_managed
+      if inventory_quantity > 0
+        if inventory_quantity <= threshold
+          assign status = 'low'
+          assign show_quantity = block_settings.show_inventory_quantity
+          if show_quantity
+            assign inventory_text = 'content.inventory_low_stock_show_count' | t: count: inventory_quantity
+          else
+            assign inventory_text = 'content.inventory_low_stock' | t
+          endif
+        else
+          assign status = 'in_stock'
+          assign inventory_text = 'content.inventory_in_stock' | t
         endif
       else
-        assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock'
+        if inventory_policy == 'continue'
+          assign status = 'in_stock'
+          assign inventory_text = 'content.inventory_in_stock' | t
+        else
+          assign status = 'out_of_stock'
+          assign inventory_text = 'content.inventory_out_of_stock' | t
+        endif
       endif
     else
-      if inventory_policy == 'continue'
+      if closest.product.selected_or_first_available_variant != null
         assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock'
+        assign inventory_text = 'content.inventory_in_stock' | t
       else
         assign status = 'out_of_stock'
-        assign translation_key = 'content.inventory_out_of_stock'
+        assign inventory_text = 'content.inventory_out_of_stock' | t
       endif
-    endif
-  else
-    if closest.product.selected_or_first_available_variant != null
-      assign status = 'in_stock'
-      assign translation_key = 'content.inventory_in_stock'
-    else
-      assign status = 'out_of_stock'
-      assign translation_key = 'content.inventory_out_of_stock'
     endif
   endif
 -%}
@@ -57,7 +65,11 @@
     <span
       class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}"
     >
-      {{ 'icon-inventory.svg' | inline_asset_content }}
+      {%- if block_settings.force_urgency -%}
+        <span class="fire-icon-static">🔥</span>
+      {%- else -%}
+        {{ 'icon-inventory.svg' | inline_asset_content }}
+      {%- endif -%}
     </span>
     <span
       class="product-inventory__text"
@@ -65,11 +77,7 @@
       role="status"
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
-      {%- if show_quantity -%}
-        {{ 'content.inventory_low_stock_show_count' | t: count: inventory_quantity }}
-      {%- else -%}
-        {{- translation_key | t -}}
-      {%- endif -%}
+      {{ inventory_text }}
     </span>
   </span>
 </product-inventory>
@@ -87,6 +95,14 @@
   .product-inventory__icon svg {
     width: var(--icon-size-sm);
     height: var(--icon-size-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fire-icon-static {
+    font-size: 1.2rem;
+    line-height: 1;
   }
 
   .product-inventory__icon-low {
@@ -114,6 +130,27 @@
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_inventory"
+    },
+    {
+      "type": "header",
+      "content": "Urgency Overrides"
+    },
+    {
+      "type": "checkbox",
+      "id": "force_urgency",
+      "label": "Force Urgency Mode",
+      "info": "Always show the urgency badge regardless of stock level.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Urgency Text",
+      "default": "SELLING FAST: 8 ITEMS LEFT IN STOCK"
+    },
+    {
+      "type": "header",
+      "content": "Dynamic Inventory Settings"
     },
     {
       "type": "range",
@@ -183,3 +220,4 @@
   ]
 }
 {% endschema %}
+

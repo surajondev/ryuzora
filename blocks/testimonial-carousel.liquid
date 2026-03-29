@@ -1,0 +1,181 @@
+{%- liquid
+  assign block_settings = block.settings
+-%}
+
+<div
+  class="testimonial-carousel-block"
+  style="padding-block-start: {{ block_settings.padding_top }}px; padding-block-end: {{ block_settings.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <div class="testimonial-carousel-container">
+    <div class="testimonial-carousel" id="TestimonialBlock-{{ block.id }}">
+      {%- for i in (1..10) -%}
+        {%- capture author_id -%}author_{{ i }}{%- endcapture -%}
+        {%- capture avatar_id -%}avatar_bg_{{ i }}{%- endcapture -%}
+        {%- capture text_id -%}text_{{ i }}{%- endcapture -%}
+        
+        {%- if block_settings[author_id] != blank -%}
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-card__avatar" style="background-color: {{ block_settings[avatar_id] }};">
+                <span>{{ block_settings[author_id] | slice: 0 | upcase }}</span>
+              </div>
+              <div class="testimonial-card__info">
+                <h4 class="testimonial-card__author">{{ block_settings[author_id] | escape }}</h4>
+                <div class="testimonial-card__stars">
+                  {%- for i in (1..5) -%}
+                    <span class="star">★</span>
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card__text rte">
+              {{ block_settings[text_id] }}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .testimonial-carousel-block {
+    overflow: hidden;
+    width: 100%;
+    margin: 12px 0;
+  }
+
+  .testimonial-carousel-container {
+    padding: 10px 0;
+  }
+
+  .testimonial-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 12px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .testimonial-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-card {
+    flex: 0 0 100%;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .testimonial-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__author {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .testimonial-card__stars {
+    color: #fcd400; /* Gold */
+    font-size: 0.8rem;
+    margin-top: 1px;
+  }
+
+  .testimonial-card__text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.5;
+    font-size: 0.85rem;
+  }
+
+  .testimonial-card__text p {
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Testimonial Carousel",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Testimonial 1" },
+    { "type": "text", "id": "author_1", "label": "Author 1", "default": "Aditi Patel" },
+    { "type": "color", "id": "avatar_bg_1", "label": "Avatar Color 1", "default": "#e9a8b1" },
+    { "type": "richtext", "id": "text_1", "label": "Text 1", "default": "<p>Beyond the physical support I feel more confident when I'm wearing it.</p>" },
+    { "type": "header", "content": "Testimonial 2" },
+    { "type": "text", "id": "author_2", "label": "Author 2", "default": "Nikhil R." },
+    { "type": "color", "id": "avatar_bg_2", "label": "Avatar Color 2", "default": "#a8c9e9" },
+    { "type": "richtext", "id": "text_2", "label": "Text 2", "default": "<p>The frames are of exceptional quality. DIN A4 size is perfect.</p>" },
+    { "type": "header", "content": "Testimonial 3" },
+    { "type": "text", "id": "author_3", "label": "Author 3", "default": "Priya S." },
+    { "type": "color", "id": "avatar_bg_3", "label": "Avatar Color 3", "default": "#a8e9ba" },
+    { "type": "richtext", "id": "text_3", "label": "Text 3", "default": "<p>Fast shipping and beautiful design. Highly recommended!</p>" },
+    { "type": "header", "content": "Testimonial 4" },
+    { "type": "text", "id": "author_4", "label": "Author 4" },
+    { "type": "color", "id": "avatar_bg_4", "label": "Avatar Color 4", "default": "#e9d5a8" },
+    { "type": "richtext", "id": "text_4", "label": "Text 4" },
+    { "type": "header", "content": "Testimonial 5" },
+    { "type": "text", "id": "author_5", "label": "Author 5" },
+    { "type": "color", "id": "avatar_bg_5", "label": "Avatar Color 5", "default": "#a8e9e7" },
+    { "type": "richtext", "id": "text_5", "label": "Text 5" },
+    { "type": "header", "content": "Testimonial 6" },
+    { "type": "text", "id": "author_6", "label": "Author 6" },
+    { "type": "color", "id": "avatar_bg_6", "label": "Avatar Color 6", "default": "#c9a8e9" },
+    { "type": "richtext", "id": "text_6", "label": "Text 6" },
+    { "type": "header", "content": "Testimonial 7" },
+    { "type": "text", "id": "author_7", "label": "Author 7" },
+    { "type": "color", "id": "avatar_bg_7", "label": "Avatar Color 7", "default": "#e9a8d5" },
+    { "type": "richtext", "id": "text_7", "label": "Text 7" },
+    { "type": "header", "content": "Testimonial 8" },
+    { "type": "text", "id": "author_8", "label": "Author 8" },
+    { "type": "color", "id": "avatar_bg_8", "label": "Avatar Color 8", "default": "#a8bbe9" },
+    { "type": "richtext", "id": "text_8", "label": "Text 8" },
+    { "type": "header", "content": "Testimonial 9" },
+    { "type": "text", "id": "author_9", "label": "Author 9" },
+    { "type": "color", "id": "avatar_bg_9", "label": "Avatar Color 9", "default": "#b6e9a8" },
+    { "type": "richtext", "id": "text_9", "label": "Text 9" },
+    { "type": "header", "content": "Testimonial 10" },
+    { "type": "text", "id": "author_10", "label": "Author 10" },
+    { "type": "color", "id": "avatar_bg_10", "label": "Avatar Color 10", "default": "#e9b8a8" },
+    { "type": "richtext", "id": "text_10", "label": "Text 10" },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 16 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 16 }
+  ],
+  "presets": [
+    { "name": "Testimonial Carousel" }
+  ]
+}
+{% endschema %}
