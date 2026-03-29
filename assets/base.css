@@ -28,6 +28,13 @@ body {
   --glass-blur: blur(12px);
   --glass-opacity: 0.85;
   --spring-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --brand-yellow: #fcd400;
+}
+
+/* Custom Highlight for Headings */
+h1 strong, .h1 strong {
+  color: var(--brand-yellow);
+  font-weight: inherit; /* Maintain the heading's weight */
 }
 
 /* Tonal Layering Utilities */
