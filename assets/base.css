@@ -4422,32 +4422,14 @@ product-inventory.spacing-style {
     display: inline-block;
 }
 
-/* Store Review Star Styling */
-.store-review-link {
-    text-decoration: none;
-    color: var(--color-foreground);
-    font-weight: 500;
-    white-space: nowrap;
-    transition: opacity 0.2s;
+/* Store Rating Stars - Premium Gold */
+.text-block b {
+    color: #fcd400 !important;
+    font-weight: bold;
 }
 
-.store-review-link:hover {
-    opacity: 0.8;
-    text-decoration: underline;
-}
-
-.store-review-link::first-letter,
-.store-review-link:contains("★") {
-    color: #887e00; /* Gold/Bronze stars */
-}
-
-/* Specific star color override */
-.store-review-link {
-    color: #002d1c;
-}
-
-.store-review-link:before {
-    content: ""; /* Placeholder for logic if needed */
+[data-block-id*="store_reviews"] {
+    margin-bottom: 4px;
 }
 
 
