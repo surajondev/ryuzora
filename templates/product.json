@@ -191,9 +191,9 @@
               "type": "product-inventory",
               "settings": {
                 "force_urgency": true,
-                "urgency_text": "SELLING FAST: 8 ITEMS LEFT IN STOCK",
+                "urgency_text": "SELLING FAST",
                 "inventory_threshold": 10,
-                "show_inventory_quantity": true,
+                "show_inventory_quantity": false,
                 "padding-block-start": 8,
                 "padding-block-end": 8,
                 "padding-inline-start": 0,
@@ -259,6 +259,13 @@
                 }
               },
               "block_order": []
+            },
+            "buy_reassurance": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<style>\n  .buy-reassurance {\n    display: grid;\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n    gap: 10px;\n    width: 100%;\n    margin-top: 14px;\n  }\n\n  .buy-reassurance__item {\n    border: 1px solid rgba(0,0,0,0.08);\n    border-radius: 14px;\n    padding: 12px 12px 11px;\n    background: #fff;\n  }\n\n  .buy-reassurance__title {\n    margin: 0 0 4px;\n    color: #111;\n    font-size: 0.8rem;\n    font-weight: 800;\n    line-height: 1.15;\n    text-transform: uppercase;\n  }\n\n  .buy-reassurance__copy {\n    margin: 0;\n    color: rgba(0,0,0,0.68);\n    font-size: 0.84rem;\n    line-height: 1.4;\n  }\n\n  @media screen and (max-width: 749px) {\n    .buy-reassurance {\n      grid-template-columns: 1fr;\n      gap: 8px;\n    }\n\n    .buy-reassurance__item {\n      padding: 11px 12px;\n    }\n  }\n</style>\n\n<div class=\"buy-reassurance\">\n  <div class=\"buy-reassurance__item\">\n    <p class=\"buy-reassurance__title\">Framed & Ready To Hang</p>\n    <p class=\"buy-reassurance__copy\">Premium football wall art with a clean, display-ready finish.</p>\n  </div>\n  <div class=\"buy-reassurance__item\">\n    <p class=\"buy-reassurance__title\">5-7 Day India Delivery</p>\n    <p class=\"buy-reassurance__copy\">Orders are processed fast and shipped safely across India.</p>\n  </div>\n  <div class=\"buy-reassurance__item\">\n    <p class=\"buy-reassurance__title\">Safe Packaging</p>\n    <p class=\"buy-reassurance__copy\">Packed securely to help your frame arrive in proper condition.</p>\n  </div>\n</div>"
+              },
+              "blocks": {}
             },
             "testimonials": {
               "type": "testimonial-carousel",
@@ -615,7 +622,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Size:</strong> DIN A4 (210 x 297 mm / 8×12 in)</p>{{ closest.product.description }}",
+                        "text": "<p><strong>What You Get:</strong> 1 premium football wall frame in DIN A4 size (210 x 297 mm / 8×12 in), made to look sharp in bedrooms, gaming setups, offices, and gifting moments.</p><p><strong>Finish:</strong> Clean, premium print output with a neat framed presentation that is ready to display.</p><p><strong>Best For:</strong> Football fans who want iconic moments on their wall without the cheap poster feel.</p>{{ closest.product.description }}",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -654,7 +661,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We process all orders within 1-2 business days. Standard delivery takes 5-7 business days across India. Expedited shipping options available at checkout.</p>",
+                        "text": "<p>We usually process orders within 1-2 business days. Standard delivery generally takes 5-7 business days across India, depending on your location.</p><p>Your order is packed carefully to help it reach you in safe condition. Once shipped, tracking details are shared so you can follow the delivery.</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -693,7 +700,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We offer a 5-day easy return policy. If you are not completely satisfied with your purchase, you can return it for a refund or exchange within 5 days of delivery. Items must be unused and in original packaging. Initiate your return via our website or contact our support team.</p>",
+                        "text": "<p>We offer a 5-day easy return policy. If your order arrives damaged or there is an issue with the product, contact us within 5 days of delivery and our team will help with the next steps.</p><p>For the smoothest support experience, keep the item in its original condition and packaging until the issue is resolved.</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -741,10 +748,11 @@
             "divider_top",
             "variant_picker",
             "buy_buttons",
-            "testimonials",
+            "buy_reassurance",
             "trust_bar",
             "accordions",
-            "frame_features"
+            "frame_features",
+            "testimonials"
           ]
         }
       },
