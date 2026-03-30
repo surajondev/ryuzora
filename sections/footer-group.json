@@ -56,7 +56,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>JOIN THE SQUAD<\/h2>",
+                "text": "<h2>JOIN THE SQUAD</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -68,7 +68,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get early access to limited edition drops, secret sales, and exclusive football stories.<\/p>",
+                "text": "<p>Get early access to limited edition drops, secret sales, and exclusive football stories.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -79,7 +79,7 @@
             "text_footnote": {
               "type": "text",
               "settings": {
-                "text": "<p>NO SPAM. ONLY THE BEAUTIFUL GAME.<\/p>",
+                "text": "<p>NO SPAM. ONLY THE BEAUTIFUL GAME.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -99,10 +99,9 @@
             "width": "fill",
             "custom_width": 100,
             "inherit_color_scheme": true,
-            "placeholder": "Your Pitch Address (Email)",
+            "color_scheme": "",
             "heading": "",
             "heading_preset": "h3",
-            "color_scheme": "",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 100,
@@ -130,8 +129,7 @@
         "gap": 20,
         "color_scheme": "scheme-4",
         "padding-block-start": 64,
-        "padding-block-end": 64,
-        "style_class": "footer-rebrand--pill"
+        "padding-block-end": 64
       }
     },
     "footer_utilities_jLGE8U": {
@@ -150,7 +148,7 @@
         "footer_links_custom": {
           "type": "text",
           "settings": {
-            "text": "<ul><li><a href=\"\/policies\/shipping-policy\">RETURNS & SHIPPING<\/a><\/li><li><a href=\"\/pages\/track-order\">TRACK ORDER<\/a><\/li><li><a href=\"\/policies\/privacy-policy\">PRIVACY POLICY<\/a><\/li><li><a href=\"\/policies\/terms-of-service\">TERMS OF SERVICE<\/a><\/li><\/ul>",
+            "text": "<ul><li><a href=\"/policies/shipping-policy\">RETURNS & SHIPPING</a></li><li><a href=\"/pages/track-order\">TRACK ORDER</a></li><li><a href=\"/policies/privacy-policy\">PRIVACY POLICY</a></li><li><a href=\"/policies/terms-of-service\">TERMS OF SERVICE</a></li></ul>",
             "alignment": "center",
             "type_preset": "paragraph",
             "case": "uppercase",
@@ -162,8 +160,7 @@
           "settings": {
             "show_powered_by": false,
             "font_size": "0.75rem",
-            "case": "uppercase",
-            "custom_text": "© 2024 Ryuzora Design. ENGINEERED FOR THE BEAUTIFUL GAME."
+            "case": "uppercase"
           },
           "blocks": {}
         }

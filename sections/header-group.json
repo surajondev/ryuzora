@@ -18,7 +18,7 @@
           "type": "_announcement",
           "settings": {
             "text": "🔥 SALE LIVE NOW — Use code <strong>GOAT</strong> for 10% additional off 🔥",
-            "link": "shopify:\/\/collections\/all",
+            "link": "shopify://collections/all",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "700",
@@ -31,7 +31,7 @@
           "type": "_announcement",
           "settings": {
             "text": "⚽ FREE SHIPPING ON ORDERS OVER ₹999 — LIMITED TIME ONLY ⚽",
-            "link": "shopify:\/\/collections\/all",
+            "link": "shopify://collections/all",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "700",
@@ -44,7 +44,7 @@
           "type": "_announcement",
           "settings": {
             "text": "🏆 SALE ENDS SOON — Don't miss out! Use code <strong>GOAT</strong> at checkout 🏆",
-            "link": "shopify:\/\/collections\/all",
+            "link": "shopify://collections/all",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "700",
@@ -78,9 +78,7 @@
           "settings": {
             "hide_logo_on_home_page": false,
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-end": 0
           },
           "blocks": {}
         },
