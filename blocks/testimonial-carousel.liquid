@@ -39,26 +39,86 @@
   </div>
 </div>
 
+<script>
+  (() => {
+    const carousel = document.getElementById('TestimonialBlock-{{ block.id }}');
+    if (!carousel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let animationFrameId = null;
+    let resumeTimer = null;
+    const speed = 0.5;
+
+    const step = () => {
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+      if (maxScroll <= 0) {
+        animationFrameId = window.requestAnimationFrame(step);
+        return;
+      }
+
+      if (carousel.scrollLeft >= maxScroll - 1) {
+        carousel.scrollLeft = 0;
+      } else {
+        carousel.scrollLeft += speed;
+      }
+
+      animationFrameId = window.requestAnimationFrame(step);
+    };
+
+    const start = () => {
+      if (animationFrameId !== null) return;
+      animationFrameId = window.requestAnimationFrame(step);
+    };
+
+    const stop = () => {
+      if (animationFrameId === null) return;
+      window.cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    };
+
+    const pauseTemporarily = () => {
+      stop();
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(start, 1500);
+    };
+
+    start();
+    carousel.addEventListener('pointerdown', pauseTemporarily);
+    carousel.addEventListener('touchstart', pauseTemporarily, { passive: true });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+  })();
+</script>
+
 {% stylesheet %}
   .testimonial-carousel-block {
     overflow: hidden;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     margin: 12px 0;
   }
 
   .testimonial-carousel-container {
     padding: 10px 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .testimonial-carousel {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: none;
     scroll-behavior: smooth;
     gap: 12px;
+    padding: 0 4px;
     -ms-overflow-style: none;
     scrollbar-width: none;
     flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .testimonial-carousel::-webkit-scrollbar {
@@ -76,6 +136,12 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .testimonial-card {
+      flex: 0 0 320px;
+    }
   }
 
   .testimonial-card__header {

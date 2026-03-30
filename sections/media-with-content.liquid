@@ -22,13 +22,13 @@
     --media-height: {{ section.settings.media_height }};
     {%- case section.settings.media_height %}
       {% when '50svh' %}
-        --media-height-mobile: 30svh;
+        --media-height-mobile: 35svh;
       {% when '60svh' %}
-        --media-height-mobile: 50svh;
+        --media-height-mobile: 45svh;
       {% when '80svh' %}
-        --media-height-mobile: 70svh;
+        --media-height-mobile: 55svh;
       {% when '100svh' %}
-        --media-height-mobile: 100svh;
+        --media-height-mobile: 65svh;
       {% else %}
         --media-height-mobile: auto;
     {% endcase -%}

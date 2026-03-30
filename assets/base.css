@@ -4326,11 +4326,18 @@ product-inventory.spacing-style {
   border-radius: 12px !important;
   padding: 24px 16px !important;
   color: #ffffff !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
 }
 
 [data-block-id*="trust_bar"] .group-block {
     justify-content: space-around !important;
     align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
 }
 
 /* Force centered stacking for each trust item */
@@ -4353,6 +4360,43 @@ product-inventory.spacing-style {
 [data-block-id*="trust_bar"] p {
     color: #ffffff !important;
     margin: 0 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .product-details .testimonial-carousel-block + .group-block {
+    background-color: #002d1c !important;
+    background: #002d1c !important;
+    border-radius: 12px !important;
+    padding: 16px 12px !important;
+  }
+
+  .product-details .testimonial-carousel-block + .group-block > .group-block-content {
+    flex-flow: row nowrap !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .product-details .testimonial-carousel-block + .group-block > .group-block-content > .group-block {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .product-details .testimonial-carousel-block + .group-block > .group-block-content > .group-block > .group-block-content {
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .product-details .testimonial-carousel-block + .group-block .product-inventory__icon,
+  .product-details .testimonial-carousel-block + .group-block .icon-block,
+  .product-details .testimonial-carousel-block + .group-block svg,
+  .product-details .testimonial-carousel-block + .group-block strong,
+  .product-details .testimonial-carousel-block + .group-block p {
+    color: #ffffff !important;
+  }
 }
 
 
@@ -4395,6 +4439,69 @@ product-inventory.spacing-style {
   object-fit: cover;
 }
 
+.product-details .buy-buttons-block + .group-block {
+  width: 100%;
+  max-width: 100%;
+}
+
+.product-details .buy-buttons-block + .group-block > .group-block-content {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  align-items: start !important;
+}
+
+.product-details .buy-buttons-block + .group-block > .group-block-content > * {
+  min-width: 0;
+}
+
+.product-details .buy-buttons-block + .group-block :is(deferred-media, .video-placeholder-wrapper) {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.product-details .buy-buttons-block + .group-block :is(video, iframe, img, .deferred-media__poster-button) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 749px) {
+  .product-details .buy-buttons-block + .group-block > .group-block-content {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    padding-bottom: 6px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .product-details .buy-buttons-block + .group-block > .group-block-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-details .buy-buttons-block + .group-block > .group-block-content > * {
+    flex: 0 0 min(42vw, 165px) !important;
+    width: min(42vw, 165px) !important;
+    max-width: min(42vw, 165px) !important;
+    min-width: min(42vw, 165px) !important;
+    scroll-snap-align: start;
+  }
+
+  .product-details .buy-buttons-block + .group-block :is(deferred-media, .video-placeholder-wrapper) {
+    width: 100% !important;
+    aspect-ratio: 9 / 16;
+    height: auto;
+    max-height: 295px;
+  }
+}
+
 /* Testimonial Review Cards */
 [data-block-id*="testimonials"] .review-card {
     background: #fff;
@@ -4431,5 +4538,3 @@ product-inventory.spacing-style {
 [data-block-id*="store_reviews"] {
     margin-bottom: 4px;
 }
-
-
